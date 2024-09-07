@@ -76,17 +76,32 @@ Integer quis mauris ac nibh pulvinar venenatis rhoncus non urna. Praesent interd
 longText = longText.replaceAll('\n', '');
 
 let wordCount = 0;
+let etWordCount = 0;
 let idx = longText.indexOf(' ');
+let word = longText.slice(0, idx);
+word = word.replace(/[^a-zA-Z]/g, "");
 
 while (idx > 0){
     wordCount ++;
+    if(word === 'et'){
+        etWordCount++;
+    }
+
     longText = longText.slice(idx + 1);
     longText = longText.trim();
     idx = longText.indexOf(' ');
+
+    word =  idx > 0 ?  longText.slice(0, idx) : longText;
+    word = word.replace(/[^a-zA-Z]/g, "");
 }
-wordCount ++;    
+wordCount ++;
+
+if(word === 'et'){
+    etWordCount++;
+}    
 
 console.log(`Word Count: ${wordCount}`);
+console.log(`et Word Count: ${etWordCount}`);
 
 //Bonus 2:
 let phraseToCheck = "No 'x' in Nixon";
